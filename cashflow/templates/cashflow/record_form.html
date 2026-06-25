@@ -11,7 +11,7 @@
             <div class="alert alert-danger">{{ form.non_field_errors }}</div>
         {% endif %}
 
-        <form method="post" novalidate class="card card-body">
+        <form method="post" class="card card-body">
             {% csrf_token %}
 
             <div class="mb-3">
