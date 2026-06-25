@@ -166,3 +166,14 @@ cashflow/
 ├── templates/cashflow/  # Bootstrap-шаблоны
 └── static/cashflow/js/  # dependent_selects.js
 ```
+
+## 📸 Скриншоты
+
+### Список записей с фильтрами
+![Список записей](docs/screenshots/01-record-list.png)
+
+### Форма записи с зависимыми select (Списание → Инфраструктура → VPS)
+![Форма записи](docs/screenshots/02-record-form.png)
+
+### Управление справочниками
+![Справочники](docs/screenshots/03-references.png)
