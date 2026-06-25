@@ -77,7 +77,7 @@ UI невозможно. На сервере та же проверка дубл
 
 ```bash
 # 1. Клонировать и зайти в каталог
-git clone <repo-url>
+git clone [<repo-url>](https://github.com/egordushenko/cashflow-service)
 cd Django_web
 
 # 2. Виртуальное окружение
