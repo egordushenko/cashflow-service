@@ -1,0 +1,84 @@
+{% extends 'cashflow/base.html' %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <h1 class="h3 mb-3">{{ title }}</h1>
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <form method="post" novalidate class="card card-body">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label" for="{{ form.created_date.id_for_label }}">Дата</label>
+                {{ form.created_date }}
+                {% for e in form.created_date.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="{{ form.status.id_for_label }}">Статус</label>
+                {{ form.status }}
+                {% for e in form.status.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="{{ form.operation_type.id_for_label }}">Тип операции</label>
+                {{ form.operation_type }}
+                {% for e in form.operation_type.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="{{ form.category.id_for_label }}">Категория</label>
+                {{ form.category }}
+                {% for e in form.category.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="{{ form.subcategory.id_for_label }}">Подкатегория</label>
+                {{ form.subcategory }}
+                {% for e in form.subcategory.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="{{ form.amount.id_for_label }}">Сумма, ₽</label>
+                {{ form.amount }}
+                {% for e in form.amount.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="{{ form.comment.id_for_label }}">Комментарий</label>
+                {{ form.comment }}
+                {% for e in form.comment.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">Сохранить</button>
+                <a href="{% url 'cashflow:record_list' %}" class="btn btn-outline-secondary">Назад</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'cashflow/js/dependent_selects.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        initDependentSelects({
+            operationTypeId: '{{ form.operation_type.id_for_label }}',
+            categoryId: '{{ form.category.id_for_label }}',
+            subcategoryId: '{{ form.subcategory.id_for_label }}',
+            categoriesUrl: '{% url "cashflow:ajax_categories" %}',
+            subcategoriesUrl: '{% url "cashflow:ajax_subcategories" %}',
+            selectedCategory: '{{ form.category.value|default:"" }}',
+            selectedSubcategory: '{{ form.subcategory.value|default:"" }}',
+            includeEmptyOption: false,
+        });
+    });
+</script>
+{% endblock %}

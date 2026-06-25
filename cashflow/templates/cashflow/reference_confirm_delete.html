@@ -1,0 +1,22 @@
+{% extends 'cashflow/base.html' %}
+{% block title %}Удаление справочника{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <h1 class="h3 mb-3">Удаление: {{ label }}</h1>
+        <div class="card card-body">
+            <p>Вы действительно хотите удалить «<strong>{{ obj }}</strong>»?</p>
+            <p class="text-muted small">
+                Если элемент используется в записях ДДС или связанных справочниках,
+                удаление будет отклонено.
+            </p>
+            <form method="post" class="d-flex gap-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Удалить</button>
+                <a href="{% url 'cashflow:references' %}" class="btn btn-outline-secondary">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

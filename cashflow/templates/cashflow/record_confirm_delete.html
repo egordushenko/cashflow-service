@@ -1,0 +1,24 @@
+{% extends 'cashflow/base.html' %}
+{% block title %}Удаление записи{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <h1 class="h3 mb-3">Удаление записи ДДС</h1>
+        <div class="card card-body">
+            <p>Вы действительно хотите удалить запись?</p>
+            <ul class="list-unstyled mb-3">
+                <li><strong>Дата:</strong> {{ record.created_date|date:'d.m.Y' }}</li>
+                <li><strong>Тип:</strong> {{ record.operation_type.name }}</li>
+                <li><strong>Категория:</strong> {{ record.category.name }} / {{ record.subcategory.name }}</li>
+                <li><strong>Сумма:</strong> {{ record.amount }} ₽</li>
+            </ul>
+            <form method="post" class="d-flex gap-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Удалить</button>
+                <a href="{% url 'cashflow:record_list' %}" class="btn btn-outline-secondary">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
